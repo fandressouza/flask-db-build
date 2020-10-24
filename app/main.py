@@ -30,7 +30,31 @@ def index():
         },
     ]
     user_collection.insert_many(users)
-    return '<h1>User added succesfully!</h1>'
+    return '<h1>Users added succesfully!</h1>'
+
+
+@main.route('/insert-unique')
+def insert():
+    user_collection = mongo.db.usersNew
+
+    new_user = {
+        'name': 'Felipe', 
+        'age': 34,
+        'profession': 'Software Developer',
+        'country': 'BR'
+    }
+
+    # Before inserting, look for that name in the DB
+    user = user_collection.find({ 'name' : new_user['name']})
+
+    output = [{'name' : user['name']} for u in user]
+
+    if not output:
+        user_collection.insert_one(new_user)
+    else:
+        return '<h1>Entry already in DB</h1>'
+
+    return jsonify(output)
 
 
 
