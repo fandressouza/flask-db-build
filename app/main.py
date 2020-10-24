@@ -12,18 +12,21 @@ def index():
     users = [
         {
             'name' : 'Anthony',
+            'email' : 'tony@email.com',
             'age'  : 24,
             'profession' : 'Software Engineer',
             'country' : 'US'
         },
         {
             'name' : 'Mark',
+            'email' : 'mark@email.com',
             'age'  : 44,
             'profession' : 'Sales person',
             'country' : 'CA'
         },
         {
             'name' : 'Agatha',
+            'email' : 'agatha@email.com',
             'age'  : 27,
             'profession' : 'Dentist',
             'country' : 'FR'
@@ -37,25 +40,26 @@ def index():
 def insert():
     user_collection = mongo.db.usersNew
 
-    new_user = {
-        'name': 'Felipe', 
-        'age': 34,
-        'profession': 'Software Developer',
-        'country': 'BR'
-    }
+    try:
 
-    # Before inserting, look for that name in the DB
-    user = user_collection.find({ 'name' : new_user['name']})
+        user_collection.create_index([("email", 1)], unique=True)
 
-    output = [{'name' : user['name']} for u in user]
+        new_user = {
+            'name': 'Felipe', 
+            'email' : 'felipe@email.com',
+            'age': 34,
+            'profession': 'Software Developer',
+            'country': 'BR'
+        }
 
-    if not output:
         user_collection.insert_one(new_user)
-    else:
-        return '<h1>Entry already in DB</h1>'
 
-    return jsonify(output)
+        return '<h1>User successfully inserted!</h1>'
+        
+    except:
 
+        return '<h1>data point already exists</h1>'
+    
 
 
 @main.route('/read-all')
@@ -65,6 +69,7 @@ def read():
     output = [
         {
         'name': user['name'], 
+        'email' : user['email'],
         'age': user['age'],
         'profession': user['profession'],
         'country': user['country']
