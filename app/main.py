@@ -1,12 +1,18 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, render_template
 
 from .extensions import mongo
 
 main = Blueprint('main', __name__)
 
 
-@main.route('/insert-many')
+@main.route('/', methods=['GET'])
+@main.route('/home', methods=['GET'])
 def index():
+    return render_template('index.html', title="Home Page")
+
+
+@main.route('/insert-many')
+def insert_many():
     user_collection = mongo.db.usersNew
     # user_collection.createIndex( {'name' : 1} , {'unique' : True} )
     users = [
@@ -37,7 +43,7 @@ def index():
 
 
 @main.route('/insert-unique')
-def insert():
+def insert_unique():
     user_collection = mongo.db.usersNew
 
     try:
@@ -63,7 +69,7 @@ def insert():
 
 
 @main.route('/read-all')
-def read():
+def read_all():
     user_collection = mongo.db.usersNew
     users = user_collection.find()
     output = [
