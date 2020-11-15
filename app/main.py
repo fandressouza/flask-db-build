@@ -14,7 +14,6 @@ def index():
 @main.route('/insert-many')
 def insert_many():
     user_collection = mongo.db.usersNew
-    # user_collection.createIndex( {'name' : 1} , {'unique' : True} )
     users = [
         {
             'name' : 'Anthony',
@@ -47,7 +46,6 @@ def insert_unique():
     user_collection = mongo.db.usersNew
 
     try:
-
         user_collection.create_index([("email", 1)], unique=True)
 
         new_user = {
@@ -61,9 +59,7 @@ def insert_unique():
         user_collection.insert_one(new_user)
 
         return '<h1>User successfully inserted!</h1>'
-        
     except:
-
         return '<h1>data point already exists</h1>'
     
 
