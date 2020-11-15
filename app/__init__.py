@@ -2,6 +2,7 @@ from flask import Flask
 
 from .extensions import mongo
 from .main import main
+from .auth import auth
 
 def create_app(config_object='app.settings'):
     app = Flask(__name__)
@@ -10,6 +11,8 @@ def create_app(config_object='app.settings'):
 
     mongo.init_app(app)
 
+    # Blueprints
     app.register_blueprint(main)
+    app.register_blueprint(auth)
 
     return app
