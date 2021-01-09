@@ -14,31 +14,36 @@ def index():
 @main.route('/insert-many')
 def insert_many():
     user_collection = mongo.db.usersNew
-    users = [
-        {
-            'name' : 'Anthony',
-            'email' : 'tony@email.com',
-            'age'  : 24,
-            'profession' : 'Software Engineer',
-            'country' : 'US'
-        },
-        {
-            'name' : 'Mark',
-            'email' : 'mark@email.com',
-            'age'  : 44,
-            'profession' : 'Sales person',
-            'country' : 'CA'
-        },
-        {
-            'name' : 'Agatha',
-            'email' : 'agatha@email.com',
-            'age'  : 27,
-            'profession' : 'Dentist',
-            'country' : 'FR'
-        },
-    ]
-    user_collection.insert_many(users)
-    return '<h1>Users added succesfully!</h1>'
+
+    try:
+
+        users = [
+            {
+                'name' : 'Anthony',
+                'email' : 'tony@email.com',
+                'age'  : 24,
+                'profession' : 'Software Engineer',
+                'country' : 'US'
+            },
+            {
+                'name' : 'Mark',
+                'email' : 'mark@email.com',
+                'age'  : 44,
+                'profession' : 'Sales person',
+                'country' : 'CA'
+            },
+            {
+                'name' : 'Agatha',
+                'email' : 'agatha@email.com',
+                'age'  : 27,
+                'profession' : 'Dentist',
+                'country' : 'FR'
+            },
+        ]
+        user_collection.insert_many(users)
+        return '<h1>Users added succesfully!</h1>'
+    except:
+        return '<h1>Users already exist!</h1>'
 
 
 @main.route('/insert-unique')

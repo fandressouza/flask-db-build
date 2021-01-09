@@ -1,2 +1,6 @@
 .env
 .flaskenv
+app/__pycache__/
+.venv/
+Pipfile
+Pipfile.lock
