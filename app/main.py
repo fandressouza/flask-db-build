@@ -91,18 +91,26 @@ def read_all():
 def insert():
     if request.method == 'POST':
 
-        user_collection = mongo.db.usersNew
+        try:
 
-        new_user = {
-            'name': request.form['username'], 
-            'email' : request.form['email'],
-            'age': request.form['age'],
-            'profession': request.form['profession'],
-            'country': request.form['country']
-        }
+            user_collection = mongo.db.usersNew
 
-        user_collection.insert_one(new_user)
+            user_collection.create_index([("email", 1)], unique=True)
 
-        return "<h1>Thanks for submitting your data " + request.form['username'] + "</h1>" + "<a href='" + url_for('main.index') + "'>Go Back</a>"
+            new_user = {
+                'name': request.form['username'], 
+                'email' : request.form['email'],
+                'age': request.form['age'],
+                'profession': request.form['profession'],
+                'country': request.form['country']
+            }
+
+            user_collection.insert_one(new_user)
+
+            return "<h1>Thanks for submitting your data " + request.form['username'] + "</h1>" + "<a href='" + url_for('main.index') + "'>Go Back</a>"
+
+        except:
+
+            return "<h1>the email you provided already exists in the database</h1>" + "<a href='" + url_for('main.index') + "'>Go Back</a>"
 
     return render_template('index.html', title="Home Page")

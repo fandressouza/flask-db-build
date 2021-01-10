@@ -2,10 +2,29 @@
 
 This repository contains some Flask examples for a CRUD app.
 
-To Do:
+To run this sample code, run the command below:
 
-- I will add an example for each crud action
-- Handle all errors effectively
-- Comment the code and explain the choices I made
-- Convert the repository to a template so it can be reused
+```pipenv install flask flask-pymongo python-dotenv```
+
+Run the environment by using:
+
+```pipenv shell```
+
+Next, create these files:
+
+.flaskenv
+.env
+
+.flaskenv should contain the following:
+
+FLASK_APP=app
+FLASK_ENV=development
+
+.env will contain the connection string for mongodb:
+
+MONGO_URI='mongodb+srv://<username>:<password>@cluster0.daxh6.mongodb.net/<DB>?retryWrites=true&w=majority'
+
+You should get the url from the mongo Atlas website.
+
+
 
