@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for
 
 from .extensions import mongo
 
@@ -84,3 +84,25 @@ def read_all():
     ]
     
     return jsonify(output)
+
+
+# access data from a form using request.form
+@main.route('/insert', methods=['GET', 'POST'])
+def insert():
+    if request.method == 'POST':
+
+        user_collection = mongo.db.usersNew
+
+        new_user = {
+            'name': request.form['username'], 
+            'email' : request.form['email'],
+            'age': request.form['age'],
+            'profession': request.form['profession'],
+            'country': request.form['country']
+        }
+
+        user_collection.insert_one(new_user)
+
+        return "<h1>Thanks for submitting your data " + request.form['username'] + "</h1>" + "<a href='" + url_for('main.index') + "'>Go Back</a>"
+
+    return render_template('index.html', title="Home Page")

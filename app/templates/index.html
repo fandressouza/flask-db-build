@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Welcome to the Home Page!</h1>
-    <form action="/insert-unique">
-        <input type="email" name="email" placeholder="Enter an email!">
+    <form action="/insert" method="POST">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter an email!">
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" placeholder="Enter a surname">
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age">
+        </div>
+        <div>
+            <label for="profession">Profession</label>
+            <input type="text" name="profession" id="profession">
+        </div>
+        <div>
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country">
+        </div>
         <button type="submit">Submit</button>
     </form>
 </body>
+
 </html>
