@@ -22,7 +22,7 @@ FLASK_ENV=development
 
 .env will contain the connection string for mongodb:
 
-MONGO_URI='mongodb+srv://<username>:<password>@cluster0.daxh6.mongodb.net/<DB>?retryWrites=true&w=majority'
+MONGO_URI='mongodb+srv://\<username\>:\<password\>@cluster0.daxh6.mongodb.net/\<DB\>?retryWrites=true&w=majority'
 
 You should get the url from the mongo Atlas website.
 
